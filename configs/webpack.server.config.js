@@ -4,8 +4,6 @@ const { DefinePlugin } = require('webpack')
 const NODE_ENV = process.env.NODE_ENV;
 const GLOBAL_CSS_REGEX = /\.global\.css$/
 
-
-
 const COMMON_PLUGINS = [
     new DefinePlugin({
         'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`
@@ -13,15 +11,13 @@ const COMMON_PLUGINS = [
 ]
 
 module.exports = {
-
     mode: NODE_ENV ? NODE_ENV : 'development',
     target: 'node',
     entry: path.resolve(__dirname, '../src/server/server.js'),
     output: {
         path: path.resolve(__dirname, '../dist/server'),
         filename: 'server.js',
-        // clean: true,
-
+        clean: true,
     },
     resolve: {
         extensions: ['.js', '.ts', '.jsx', '.tsx', '.json']

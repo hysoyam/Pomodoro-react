@@ -1,6 +1,5 @@
 const path = require('path')
 const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
@@ -8,14 +7,12 @@ const IS_PROD = NODE_ENV === 'production';
 const GLOBAL_CSS_REGEX = /\.global\.css$/
 
 function setupDevtool() {
-    // if (IS_DEV) return 'eval-source-map';
     if (IS_DEV) return 'eval-source-map';
     if (IS_PROD) return false;
 }
 
 const DEV_PLUGINS = [
     new HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(),
 ]
 
 const COMMON_PLUGINS = [
@@ -34,7 +31,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../dist/client'),
         filename: 'client.js',
-        // clean: true,
+        clean: true,
         publicPath: '/static/'
     },
 
@@ -80,9 +77,9 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
-        alias: {
-            'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom'
-        }
+        // alias: {
+        //     'react-dom': IS_DEV ? '@hot-loader/react-dom' : 'react-dom'
+        // }
     },
 
     plugins: IS_DEV ? DEV_PLUGINS.concat(COMMON_PLUGINS) : COMMON_PLUGINS,

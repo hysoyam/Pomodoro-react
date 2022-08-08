@@ -7,7 +7,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const clientCompiler = webpack(webpackClientConfig)
-const compiler = webpack(webpackServerConfig)
+const serverCompiler = webpack(webpackServerConfig)
 
 const hmrServer = express()
 
@@ -26,11 +26,11 @@ hmrServer.listen(3001, () => {
   console.log('HMR server is running on localhost:3001');
 })
 
-compiler.run((err) => {
+serverCompiler.run((err) => {
   if (err) {
     console.log(`compilation failed:`, err)
   }
-  compiler.watch({}, (err) => {
+  serverCompiler.watch({}, (err) => {
     if (err) {
       console.log(`compilation failed:`, err)
     }

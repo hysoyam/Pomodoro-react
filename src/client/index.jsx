@@ -1,7 +1,7 @@
 import React from 'react'
-import ReactDom from 'react-dom'
-import { App } from './../App';
+import { hydrateRoot } from 'react-dom/client'
+import { App } from './../shared/App';
 
 window.addEventListener('load', () => {
-    ReactDom.hydrate(<App />, document.getElementById('root'))
-})
+    hydrateRoot(<App />, document.getElementById('root'))
+}) 
