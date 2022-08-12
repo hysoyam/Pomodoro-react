@@ -1,0 +1,7 @@
+.main {
+    display: flex;  
+}
+
+.block {
+    flex: 50% 1 1;
+}

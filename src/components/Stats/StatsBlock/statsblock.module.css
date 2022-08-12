@@ -1,0 +1,21 @@
+.statsblock {
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.time {
+    margin: 0;
+    font-size: 64px;
+    line-height: 76px;
+}
+
+.statsblock {}
+

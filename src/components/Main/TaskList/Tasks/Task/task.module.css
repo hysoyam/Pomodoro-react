@@ -1,0 +1,43 @@
+.task {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid #F4F4F4;
+    border-bottom: 1px solid #F4F4F4;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.number {
+    height: 25px;
+    width: 25px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #CACACA;
+    border-radius: 50%;
+}
+
+.more {
+    border: none;
+    background-color: transparent;
+}
+
+.more:hover {
+    cursor: pointer;
+}
+
+.more:hover>svg>* {
+    fill: #333333;
+}
+
+.title {
+    margin: 0;
+}
+
+.dropdown {
+    margin-left: auto;
+    position: relative;
+}

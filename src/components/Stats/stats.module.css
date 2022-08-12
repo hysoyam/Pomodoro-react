@@ -1,0 +1,64 @@
+.stats {}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.sort {}
+
+.activity {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+}
+
+.today {
+    grid-column: 1/5;
+    grid-row: 1/2;
+    background-color: #F4F4F4;
+}
+
+.pomodoros {
+    grid-column: 1/5;
+    grid-row: 2/3;
+    background-color: #F4F4F4;
+
+}
+
+.statistics {
+    grid-column: 5/13;
+    grid-row: 1/3;
+    background-color: pink;
+}
+
+.statsBlock {
+    grid-column: span 4;
+    background-color: #F4F4F4;
+}
+
+.statFocus {
+    background-color: #FFDDA9;
+
+}
+
+.statFocus>svg>* {
+    stroke: #FFAE35;
+}
+
+.statPause {
+    background-color: #DFDCFE;
+}
+
+.statPause>svg>* {
+    stroke: #9C97D7;
+}
+
+.statStops {
+    background-color: #C5F1FF;
+}
+
+.statStops>svg>* {
+    stroke: #7FC2D7;
+}

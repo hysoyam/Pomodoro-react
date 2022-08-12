@@ -1,0 +1,15 @@
+.today {
+    /* background-color: red !important; */
+    /* display: flex; */
+    padding: 25px;
+}
+
+.text {}
+
+.header {
+    margin-bottom: 15px;
+}
+
+.time {
+    color: #DC3E22;
+}
