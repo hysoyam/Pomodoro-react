@@ -1,3 +1,42 @@
 .dropdown {
+    transform: translate(50%, 15px);
+    right: 50%;
     position: absolute;
+    padding: 5px 0;
+    list-style: none;
+    border: 1px solid #C4C4C4;
+    background-color: #fff;
+    z-index: 100;
 }
+
+.dropdown:before {
+    content: '';
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    border-top: 1px solid #C4C4C4;
+    border-left: 1px solid #C4C4C4;
+    background-color: #fff;
+    top: 0;
+    right: 50%;
+    transform: translate(50%, -50%) rotate(45deg);
+}
+
+.item {}
+
+.item:hover {
+    background-color: #F4F4F4;
+}
+
+.button {
+    display: flex;
+    border: 0;
+    padding: 10px 15px;
+    gap: 10px;
+    color: #999999;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: transparent;
+}
+
+/* #A8B64F */

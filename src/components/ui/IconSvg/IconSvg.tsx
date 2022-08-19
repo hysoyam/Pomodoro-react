@@ -66,8 +66,6 @@ export function IconSvg({ IconName }: props) {
 
     const Icon = icons[IconName]
     return (
-        // <div className={style.iconsvg}>
-            <Icon />
-        // </div>
+        <Icon />
     )
 } 

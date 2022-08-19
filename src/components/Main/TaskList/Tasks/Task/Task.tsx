@@ -10,9 +10,9 @@ import style from './task.module.css'
 export function Task({ task }: { task: ITask }) {
 
     const dispatch = useDispatch()
-    const dropdownRoot = useRef<HTMLButtonElement>(null)
+    const dropdownRoot = useRef<HTMLDivElement>(null)
     const [isEditing, setIsEditing] = useState(false)
-    const [inputValue, setInputValue] = useState('') 
+    const [inputValue, setInputValue] = useState('')
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
         setIsEditing(true)
@@ -52,13 +52,15 @@ export function Task({ task }: { task: ITask }) {
             <p className={style.title}>{task.title}</p>
             <div className={style.dropdown}>
 
-                <button ref={dropdownRoot} id='test-btn'>Test</button>
+                {/* <button ref={dropdownRoot} id='test-btn'>Test</button> */}
+                <div  >
 
-                <Button className={style.more} >
-                    <IconSvg IconName='MoreIcon' />
-                </Button>
+                    <Button reference={dropdownRoot} className={style.more} >
+                        <IconSvg IconName='MoreIcon' />
+                    </Button>
+                    <Dropdown root={dropdownRoot} actions={actions} />
+                </div>
 
-                <Dropdown root={dropdownRoot} actions={actions} />
             </div >
             {/* fake input */}
             {isEditing && <input type={'text'} onChange={onChange} value={inputValue} />}

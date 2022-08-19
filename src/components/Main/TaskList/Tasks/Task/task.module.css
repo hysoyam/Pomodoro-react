@@ -21,6 +21,7 @@
 }
 
 .more {
+    position: relative;
     border: none;
     background-color: transparent;
 }
