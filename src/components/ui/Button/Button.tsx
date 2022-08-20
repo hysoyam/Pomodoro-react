@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './button.module.css'
 
-interface props extends React.HTMLAttributes<HTMLButtonElement> {
+interface props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     children: React.ReactNode
     secondary?: boolean
     reference?: any
@@ -21,5 +21,6 @@ export function Button({ reference: customRef, secondary, children, ...props }: 
         <button className={classList} {...props} ref={customRef}>
             {children}
         </button>
+        // <button disabled></button>
     )
 } 

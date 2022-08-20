@@ -10,8 +10,19 @@
     color: #FFFFFF;
 }
 
+.headerStoped,
+.headerPause {
+    background-color: #DC3E22;
+}
+
+.headerBreak {
+    background-color: #A8B64F;
+}
+
 .clock {
     position: relative;
+    /* height: 180px;
+    width: 360px; */
 }
 
 .clockBody {
@@ -36,12 +47,27 @@
     border: 0;
     background-color: #C4C4C4;
 }
-
+ 
 .time {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
     text-align: center;
     font-size: 150px;
     font-weight: 200;
     line-height: 120px;
+}
+
+.timePause {
+    color: #DC3E22;
+}
+
+.timeBreak {
+    color: #A8B64F;
+}
+
+.timeStop {
+    color: #9F200C;
 }
 
 .title {

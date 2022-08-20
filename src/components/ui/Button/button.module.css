@@ -1,8 +1,3 @@
-/* 
-#C4C4C4 - gray
-#A8B64F - green
-#FFFFFF
- */
 .button {
     display: flex;
     gap: 10px;
@@ -10,6 +5,8 @@
     border: solid 2px;
     font-size: 16px;
     font-weight: 500;
+    transition:
+        color ease-in-out .2s background-color ease-in-out .2s border-color ease-in-out .2s;
 }
 
 
@@ -24,8 +21,25 @@
     border-color: #A8B64F;
 }
 
+.buttonPrimary:active {
+    background-color: #899441;
+    border-color: #899441;
+}
+
 .buttonSecondary {
-    color: #C4C4C4;
+    color: #DC3E22;
     background-color: transparent;
+    border-color: #DC3E22;
+}
+
+.buttonSecondary:active {
+    color: white;
+    background-color: #DC3E22;
+}
+
+.buttonSecondary:disabled {
+    cursor: initial;
+    color: #C4C4C4;
     border-color: #C4C4C4;
+    background-color: initial;
 }

@@ -36,7 +36,7 @@ export function Task({ task }: { task: ITask }) {
             // можно заменить текст на инпут и по окончании ввода задиспатчить значение
             icon: <IconSvg IconName='EditIcon' />,
             text: 'Редактировать',
-            action: () => { dispatch(tasksSlice.actions.editById({ id: task.id, value: 'значение изменено' })) }
+            action: () => { dispatch(tasksSlice.actions.editById({ id: task.id, value: { title: 'значение изменено' } })) }
         },
         {
             icon: <IconSvg IconName='DeleteIcon' />,

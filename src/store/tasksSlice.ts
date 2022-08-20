@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ITask {
     id: string
-    pomodoros: number
-    title: string
+    pomodoros?: number
+    title?: string
 }
 
 interface ITaskState {
@@ -42,9 +42,18 @@ export const tasksSlice = createSlice({
             }
         },
 
-        editById: (state: ITaskState, action: PayloadAction<{ id: string, value: string }>) => {
+        editById: (state: ITaskState, action: PayloadAction<{
+            id: string,
+            value: {
+                pomodoros?: number,
+                title?: string
+            }
+        }>) => {
             const foundIndex = state.tasks.findIndex(task => task.id === action.payload.id)
-            state.tasks[foundIndex].title = action.payload.value
+            state.tasks[foundIndex] = {
+                ...state.tasks[foundIndex],
+                ...action.payload.value
+            }
         },
 
         deleteById: (state: ITaskState, action) => {
@@ -56,3 +65,4 @@ export const tasksSlice = createSlice({
         }
     }
 })
+
