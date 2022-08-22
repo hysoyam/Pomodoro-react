@@ -47,9 +47,14 @@ export function Task({ task }: { task: ITask }) {
     ]
 
     return (
-        <li className={style.task}>
+        <li className={`${style.task} ${task.done && style.taskDone}`}>
+            {/* можно убрать счетчик если готово  или добавить галочку*/}
+            {/* {!task.done && <p className={style.number}>{task.pomodoros}</p>} */}
             <p className={style.number}>{task.pomodoros}</p>
             <p className={style.title}>{task.title}</p>
+            {task.done && <p className={style.doneBlock}>
+                <Button className={style.doneBtn} onClick={() => { dispatch(tasksSlice.actions.deleteById(task.id)) }} >Задание готово, убрать его?</Button>
+            </p>}
             <div className={style.dropdown}>
 
                 {/* <button ref={dropdownRoot} id='test-btn'>Test</button> */}

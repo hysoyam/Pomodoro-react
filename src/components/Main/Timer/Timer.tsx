@@ -12,7 +12,6 @@ export function Timer() {
     const timer = useSelector((state: RootState) => state.timer)
     const tasks = useSelector((state: RootState) => state.tasks.tasks)
     let currentTask = tasks.find(el => el.id === timer.activeTaskId)
-    // let currentTaskID = currentTask.id
 
     if (!currentTask) {
         currentTask = tasks[0]
@@ -29,6 +28,7 @@ export function Timer() {
     const [isTouched, setIsTouched] = useState(false)
     const [isPause, setIsPause] = useState(false)
     const [isBreak, setIsBreak] = useState(false)
+    const [isAnyTasks, setIsAnyTasks] = useState(false)
 
     const [mins, setMins] = useState(currentTimeMinutes)
     const [secs, setSecs] = useState(currentTimeSeconds)
@@ -87,7 +87,7 @@ export function Timer() {
         setIsEnded(true)
         setIsTouched(false)
         setIsBreak(isBreak => !isBreak)
-        dispatch(tasksSlice.actions.decreaseTimerById(currentTask.id))
+        !isBreak && currentTask && dispatch(tasksSlice.actions.decreaseTimerById(currentTask.id))
     }
 
     function onDownStoped() {
@@ -95,6 +95,13 @@ export function Timer() {
     }
     function onUpStoped() {
         setIsStoped(false)
+    }
+    function addMins() {
+        setMins(mins => mins + 1)
+    }
+
+    function formatToTwoDigits(number: number): string {
+        return number < 10 ? '0' + number : number.toString()
     }
 
     React.useEffect(() => {
@@ -136,11 +143,11 @@ export function Timer() {
             <div className={style.clockBody}>
                 <div className={style.clock}>
                     <div className={timeClasses}>
-                        <span className={style.timeNumber}>{mins}</span>
+                        <span className={style.timeNumberMins}>{formatToTwoDigits(mins)}</span>
                         <span className={style.timeDevider}>:</span>
-                        <span className={style.timeNumber}>{secs}</span>
+                        <span className={style.timeNumberSecs}>{formatToTwoDigits(secs)}</span>
                     </div>
-                    <Button className={style.add}><IconSvg IconName='PlusIcon' /></Button>
+                    <Button className={style.add} onClick={addMins}><IconSvg IconName='PlusIcon' /></Button>
                 </div>
                 <div className={style.title}>
                     <span className={style.taskNumber}>Задача {taskNumber} - </span>{taskTitle}

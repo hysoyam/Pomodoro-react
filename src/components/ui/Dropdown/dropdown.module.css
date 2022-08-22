@@ -22,10 +22,17 @@
     transform: translate(50%, -50%) rotate(45deg);
 }
 
-.item {}
+.item {
+    transition: background-color ease-in-out .1s, color ease-in-out .1s;
+    color: #999999;
+}
 
 .item:hover {
     background-color: #F4F4F4;
+}
+
+.item:active {
+    color: #000000;
 }
 
 .button {
@@ -33,10 +40,8 @@
     border: 0;
     padding: 10px 15px;
     gap: 10px;
-    color: #999999;
+    color: inherit;
     font-size: 16px;
     font-weight: 500;
     background-color: transparent;
 }
-
-/* #A8B64F */

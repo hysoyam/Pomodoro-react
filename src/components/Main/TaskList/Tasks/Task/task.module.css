@@ -9,6 +9,29 @@
     line-height: 1;
 }
 
+.taskDone {
+    color: #A8B64F;
+}
+
+.doneBlock {
+    font-size: 14px;
+}
+
+.doneBtn {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    color: #A8B64F;
+}
+
+.doneBtn:hover {
+    cursor: pointer;
+}
+
+.doneBtn:active {
+    color: #899441;
+}
+
 .number {
     height: 25px;
     width: 25px;

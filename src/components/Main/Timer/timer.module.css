@@ -21,8 +21,6 @@
 
 .clock {
     position: relative;
-    /* height: 180px;
-    width: 360px; */
 }
 
 .clockBody {
@@ -37,7 +35,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: -75px;
+    right: -235px;
     height: 50px;
     width: 50px;
     display: flex;
@@ -46,16 +44,39 @@
     border-radius: 50%;
     border: 0;
     background-color: #C4C4C4;
+    transition: background-color ease-in-out .1s, color ease-in-out .1s;
 }
- 
+
+.add:hover {
+    cursor: pointer;
+}
+
+.add:active {
+    background-color: #899441;
+}
+
 .time {
-    /* position: absolute;
-    top: 0;
-    left: 0; */
+    position: relative;
     text-align: center;
     font-size: 150px;
     font-weight: 200;
     line-height: 120px;
+}
+
+.time>* {
+    font-size: 150px;
+}
+
+.timeNumberMins {
+
+    position: absolute;
+    right: 100%;
+}
+
+.timeNumberSecs {
+
+    position: absolute;
+    left: 100%;
 }
 
 .timePause {

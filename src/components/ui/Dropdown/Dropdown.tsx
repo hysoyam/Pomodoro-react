@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import ReactDOM from 'react-dom'
 import { Button } from '../Button'
 import style from './dropdown.module.css'
 
 interface props {
-    // root: RefObject<JsxElement> // ???
-    // root: React.MutableRefObject<null> // ???
-    // root: HTMLButtonElement | null  // ???
-    root: React.RefObject<any>  // ???
+    root: React.RefObject<any>
     actions: Array<{
         icon: JSX.Element
         text: string
@@ -18,13 +14,17 @@ interface props {
 
 export function Dropdown({ root, actions }: props) {
 
+    function handleClickOutside(e: MouseEvent) {
+        if (root.current && !root.current.contains(e.target)) {
+            SetIsOpen(false)
+        }
+    }
 
     const [isOpen, SetIsOpen] = useState(false)
 
     useEffect(() => {
-
         root.current && root.current.addEventListener('click', onClick)
-
+        document.addEventListener('click', handleClickOutside)
     }, [])
 
     function onClick(e: MouseEvent) {
@@ -46,11 +46,5 @@ export function Dropdown({ root, actions }: props) {
         })}
     </ul>)
 
-    // const portal = ReactDOM.createPortal(el, root.current)
-
-    return isOpen ?
-        el :
-        null
-
-
+    return isOpen ? el : null
 }
