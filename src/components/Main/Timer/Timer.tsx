@@ -9,26 +9,33 @@ import { tasksSlice } from '../../../store/tasksSlice';
 export function Timer() {
 
     const dispatch = useDispatch()
-    const timer = useSelector((state: RootState) => state.timer)
-    const tasks = useSelector((state: RootState) => state.tasks.tasks)
-    let currentTask = tasks.find(el => el.id === timer.activeTaskId)
+    // const timer = useSelector((state: RootState) => state.timer)
+    const tasks = useSelector((state: RootState) => state.tasks)
+    const currentTaskIndex = tasks.tasks.findIndex(el => el.id === tasks.currentTaskId)
+    let currentTask = tasks.tasks[currentTaskIndex]
 
     if (!currentTask) {
-        currentTask = tasks[0]
+        tasks.tasks.forEach((task, index) => {
+            if (!currentTask && !task.done) {
+                currentTask = task
+                dispatch(tasksSlice.actions.setCurrentTask(task.id))
+            }
+        })
     }
 
     const pomidorCount = currentTask?.pomodoros || 1
-    const taskTitle = currentTask?.title || 'не добавили'
+    const taskTitle = currentTask?.title || 'Нет текущей задачи'
     const taskNumber = 1
-    const currentTimeMinutes = timer.timeLeft.getMinutes() || 0
-    const currentTimeSeconds = timer.timeLeft.getSeconds() || 0
+    const currentTimeMinutes = 25
+    const currentTimeSeconds = 0
+    // const currentTimeMinutes = timer.timeLeft.getMinutes() || 0
+    // const currentTimeSeconds = timer.timeLeft.getSeconds() || 0
 
     const [isStoped, setIsStoped] = useState(false)
-    const [isEnded, setIsEnded] = useState(false)
+    // const [isEnded, setIsEnded] = useState(false)
     const [isTouched, setIsTouched] = useState(false)
     const [isPause, setIsPause] = useState(false)
     const [isBreak, setIsBreak] = useState(false)
-    const [isAnyTasks, setIsAnyTasks] = useState(false)
 
     const [mins, setMins] = useState(currentTimeMinutes)
     const [secs, setSecs] = useState(currentTimeSeconds)
@@ -84,7 +91,7 @@ export function Timer() {
     function onEnd() {
         stop()
         console.log('timer end');
-        setIsEnded(true)
+        // setIsEnded(true)
         setIsTouched(false)
         setIsBreak(isBreak => !isBreak)
         !isBreak && currentTask && dispatch(tasksSlice.actions.decreaseTimerById(currentTask.id))
@@ -131,6 +138,7 @@ export function Timer() {
         }
     }, [isBreak])
 
+
     const timeClasses = `${style.time} ${isTouched && !isPause ? style.timePause : ''} ${isBreak && !isPause ? style.timeBreak : ''} ${isStoped ? style.timeStop : ''}`
     const headerClasses = `${style.header} ${isTouched ? style.headerPause : ''} ${isBreak ? style.headerBreak : ''} ${isStoped ? style.headerStoped : ''}`
 
@@ -154,16 +162,32 @@ export function Timer() {
                 </div>
                 {!isBreak ?
                     <div className={style.actions}>
-                        {(!isTouched) || isPause ? <Button onClick={start}>Старт</Button> : <Button onClick={pause}>Пауза</Button>}
+
+                        {(!isTouched) || isPause ?
+                            <Button onClick={start}>Старт</Button>
+                            :
+                            <Button onClick={pause}>Пауза</Button>
+                        }
+
                         {(!isTouched) || !isPause ?
-                            <Button disabled={!isTouched} onClick={stop} onMouseDown={onDownStoped} onMouseUp={onUpStoped} secondary>Стоп</Button>
+                            <Button disabled={!isTouched}
+                                onClick={stop}
+                                onMouseDown={onDownStoped}
+                                onMouseUp={onUpStoped}
+                                secondary
+                            >Стоп</Button>
                             :
                             <Button onClick={done} secondary>Сделано</Button>
                         }
                     </div>
                     :
                     <div className={style.actions}>
-                        {(!isTouched) || isPause ? <Button onClick={start}>Старт</Button> : <Button onClick={pause}>Пауза</Button>}
+
+                        {(!isTouched) || isPause ?
+                            <Button onClick={start}>Старт</Button>
+                            :
+                            <Button onClick={pause}>Пауза</Button>}
+
                         <Button onClick={skip} secondary>Пропустить</Button>
                     </div>}
             </div>

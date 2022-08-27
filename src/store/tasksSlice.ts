@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface ITask {
     id: string
     done: boolean
+    active: boolean
     pomodoros: number
     title: string
 }
@@ -10,22 +11,33 @@ export interface ITask {
 interface ITaskState {
     tasks: ITask[]
     totalDuration: number
-    currentTaskId?: string
+    currentTaskId: string | undefined
 }
 
 const initialState: ITaskState = {
-    totalDuration: 0, tasks: [
+    totalDuration: 0,
+    currentTaskId: 'testIDActive',
+    tasks: [
         {
             id: 'testIDDone',
             done: true,
             pomodoros: 1,
-            title: 'Готовое задание'
+            title: 'Готовое задание',
+            active: false,           
+        },
+        {
+            id: 'testIDActive',
+            done: false,
+            pomodoros: 2,
+            title: 'Активное задание',
+            active: true,        
         },
         {
             id: 'testID',
             done: false,
-            pomodoros: 2,
-            title: 'Тестовое задание'
+            pomodoros: 3,
+            title: 'Тестовое задание',
+            active: false,        
         }
     ]
 }
@@ -56,9 +68,8 @@ export const tasksSlice = createSlice({
 
         markAskDone: (state: ITaskState, action: PayloadAction<string>) => {
             const foundIndex = state.tasks.findIndex(task => task.id === action.payload)
-
             state.tasks[foundIndex].done = true
-
+            state.tasks[foundIndex].active = false
         },
 
         editById: (state: ITaskState, action: PayloadAction<{
@@ -66,6 +77,7 @@ export const tasksSlice = createSlice({
             value: {
                 pomodoros?: number,
                 title?: string
+                active?: boolean
             }
         }>) => {
             const foundIndex = state.tasks.findIndex(task => task.id === action.payload.id)
@@ -81,7 +93,13 @@ export const tasksSlice = createSlice({
 
         clearAll: (state: ITaskState, action) => {
             state.tasks = []
+        },
+
+        setCurrentTask: (state: ITaskState, action: PayloadAction<string>) => {
+            state.currentTaskId = action.payload
+            state.tasks.forEach((task) => { task.active = task.id === action.payload })
         }
+
     }
 })
 
