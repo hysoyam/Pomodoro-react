@@ -18,6 +18,7 @@ export function Task({ task }: { task: ITask }) {
         setIsEditing(true)
     }
 
+
     const actions = [
         {
             icon: <IconSvg IconName='ZoomInIcon' />,
@@ -46,14 +47,33 @@ export function Task({ task }: { task: ITask }) {
         },
     ]
 
+
+
+    function setActive() {
+        dispatch(tasksSlice.actions.setCurrentTask(task.id))
+    }
+    function deleteTask() {
+        dispatch(tasksSlice.actions.deleteById(task.id))
+    }
+
+    const classes = `${style.task} ${task.active ? style.taskActive : ''} ${task.done ? style.taskDone : ''}`
+
     return (
-        <li className={`${style.task} ${task.done && style.taskDone}`}>
+       
+        <li
+            className={classes}
+            // обработчик сразабывает на всех детья
+
+            onDoubleClick={setActive}
+        >
             {/* можно убрать счетчик если готово  или добавить галочку*/}
             {/* {!task.done && <p className={style.number}>{task.pomodoros}</p>} */}
             <p className={style.number}>{task.pomodoros}</p>
             <p className={style.title}>{task.title}</p>
+
+            {/* может просто набот кнопок вместо цикла? а то не очень понятно какие есть кнопки */}
             {task.done && <p className={style.doneBlock}>
-                <Button className={style.doneBtn} onClick={() => { dispatch(tasksSlice.actions.deleteById(task.id)) }} >Задание готово, убрать его?</Button>
+                <Button className={style.doneBtn} onClick={deleteTask} >Задание готово, убрать его?</Button>
             </p>}
             <div className={style.dropdown}>
 

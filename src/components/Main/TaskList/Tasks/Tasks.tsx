@@ -31,14 +31,17 @@ export function Tasks() {
             id: uniqid(),
             done: false,
             pomodoros: 1,
-            title: taskTitle
+            title: taskTitle,
+            active: false
         }))
     }
 
+    //  TODO непрезентативный компонетн, очень много логики внутри компонента, может быть както вынести наружу?
     return (
         <div className={style.tasks}>
             <form onSubmit={onSubmit} className={style.add}>
                 <Input value={taskTitle} onChange={(e) => {
+                    // strange behavior
                     setError({
                         isError: false,
                         message: ''

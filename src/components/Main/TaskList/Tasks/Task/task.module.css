@@ -9,6 +9,10 @@
     line-height: 1;
 }
 
+.taskActive {
+    color: red !important;
+}
+
 .taskDone {
     color: #A8B64F;
 }
